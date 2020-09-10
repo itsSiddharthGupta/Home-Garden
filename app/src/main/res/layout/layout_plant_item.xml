@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="8dp"
+        android:elevation="4dp"
+        android:layout_margin="8dp"
+        android:backgroundTint="#C5E1A5">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="140dp"
+                android:layout_margin="4dp"
+                android:src="@drawable/spider_plant"
+                android:scaleType="centerCrop"
+                android:id="@+id/imgPlant"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtPlantName"
+                android:text="Spider Plant"
+                android:textSize="24sp"
+                android:textColor="@color/colorText"
+                android:layout_margin="16dp"
+                android:fontFamily="@font/open_sans_bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imgPlant"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="4dp"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintTop_toTopOf="@id/imgPlant"
+                app:layout_constraintBottom_toBottomOf="@id/imgPlant"
+                app:layout_constraintEnd_toStartOf="@id/imgPlant"
+                app:layout_constraintStart_toStartOf="parent">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:drawablePadding="4dp"
+                    android:fontFamily="@font/open_sans"
+                    android:gravity="center_vertical"
+                    android:padding="2dp"
+                    android:text="25-30°c"
+                    android:textColor="@color/colorText"
+                    android:textSize="16sp"
+                    app:drawableStartCompat="@drawable/ic_thermometer" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:drawablePadding="4dp"
+                    android:fontFamily="@font/open_sans"
+                    android:gravity="center_vertical"
+                    android:padding="2dp"
+                    android:text="Once in a week"
+                    android:textColor="@color/colorText"
+                    android:textSize="16sp"
+                    app:drawableStartCompat="@drawable/ic_drop" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

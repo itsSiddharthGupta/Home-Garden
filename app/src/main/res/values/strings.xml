@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Home Garden</string>
+    <string name="temperature_template">32 °c</string>
+</resources>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#48BD9D</color>
+    <color name="colorAccent">#FF6F00</color>
+
+    <color name="colorText">#272424</color>
+    <color name="cardBackground">#AFC99F</color>
+    <color name="colorFab">#548E46</color>
+    <color name="colorLightWhite">#EBE9F3</color>
+
+    <color name="greenStart">#48BD9D</color>
+    <color name="greenEnd">#A6D87C</color>
+    <color name="greenProgress">#9BDAC8</color>
+</resources>
