@@ -6,12 +6,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.core.view.marginEnd
 import androidx.recyclerview.widget.RecyclerView
 import com.example.homegarden.R
 import com.example.homegarden.dataclasses.PlantBasicInfo
-import com.example.homegarden.util.UtilityMethods
 
 
 class PlantsInfoListAdapter(

@@ -343,7 +343,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="8dp"
                                 android:fontFamily="@font/open_sans_bold"
-                                android:text="Identify My Plants"
+                                android:text="Identify Flowers"
                                 android:textColor="@color/colorText"
                                 android:textSize="24sp" />
 
