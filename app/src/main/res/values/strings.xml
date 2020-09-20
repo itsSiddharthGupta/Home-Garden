@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Home Garden</string>
     <string name="temperature_template">32 °c</string>
+    <string name="description_plant">“Mother in law’s Tongue” as it’s commonly referred to, makes for an ideal indoor plant for several reasons. It’s ornamental value adds a dash of beauty to your house. \n\nSnake plant requires minimal care and to top it all, has superior air purification qualities. \n\nIt removes four out of five toxins and is counted among one of the few plants that also remove carbon dioxide at night. \n\nIn other words, it continues to clean the air in your house, even as you catch up on beauty sleep at night!</string>
 </resources>

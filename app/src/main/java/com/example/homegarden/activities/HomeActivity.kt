@@ -8,7 +8,7 @@ import com.example.homegarden.R
 import com.example.homegarden.databinding.ActivityHomeBinding
 import com.example.homegarden.dataclasses.PlantBasicInfo
 
-class MainActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

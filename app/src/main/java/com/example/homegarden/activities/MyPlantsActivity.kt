@@ -1,10 +1,12 @@
 package com.example.homegarden.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.homegarden.R
 import com.example.homegarden.adapters.PlantsInfoListAdapter
 import com.example.homegarden.databinding.ActivityMyPlantsBinding
@@ -15,7 +17,7 @@ class MyPlantsActivity : AppCompatActivity(), PlantsInfoListAdapter.OnPlantItemL
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_my_plants)
-        binding.recyclerViewPlantsInfo.layoutManager = GridLayoutManager(this, 2)
+        binding.recyclerViewPlantsInfo.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         binding.recyclerViewPlantsInfo.adapter = PlantsInfoListAdapter(
             this,
             getStaticPlantsBasicInfo(),
@@ -60,5 +62,6 @@ class MyPlantsActivity : AppCompatActivity(), PlantsInfoListAdapter.OnPlantItemL
 
     override fun onPlantItemClick(plant: PlantBasicInfo) {
         Toast.makeText(this, plant.toString(), Toast.LENGTH_SHORT).show()
+        startActivity(Intent(this, PlantDetailsActivity::class.java))
     }
 }
