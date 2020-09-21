@@ -2,54 +2,38 @@ package com.example.homegarden.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.homegarden.R
 import com.example.homegarden.databinding.ActivityUserProfileBinding
+import com.example.homegarden.viewmodels.UserProfileViewModel
 import com.google.gson.Gson
 
 class UserProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUserProfileBinding
+    private lateinit var viewModel: UserProfileViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_user_profile)
-        binding.submit.setOnClickListener { saveUserDetails() }
+        viewModel =
+            ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory(application)).get(
+                UserProfileViewModel::class.java
+            )
+        binding.userProfileViewModel = viewModel
+        binding.lifecycleOwner = this
+        viewModel.user.observe(this, Observer { saveUserDetails(it) })
     }
 
-    private fun saveUserDetails(): Unit {
-        val firstName = binding.firstName.text.toString()
-        val lastName = binding.lastName.text.toString()
-        val city = binding.city.text.toString()
-        val state = binding.state.text.toString()
-        if (firstName.trim().isEmpty()) {
-            binding.inputFirstName.error = "First Name should not be empty."
-            return
-        } else {
-            binding.inputFirstName.error = null
+    private fun saveUserDetails(userProfile: UserProfile?): Unit {
+        if (userProfile != null) {
+            Log.d("UserProfile", userProfile.toString())
+            val pref = getSharedPreferences("user", MODE_PRIVATE)
+            pref.edit().putString("profile", Gson().toJson(userProfile)).apply()
+            startActivity(Intent(this, HomeActivity::class.java))
         }
-        if (lastName.trim().isEmpty()) {
-            binding.inputLastName.error = "Last Name should not be empty."
-            return
-        } else {
-            binding.inputLastName.error = null
-        }
-        if (city.trim().isEmpty()) {
-            binding.inputCity.error = "City should not be empty."
-            return
-        } else {
-            binding.inputCity.error = null
-        }
-        if (state.trim().isEmpty()) {
-
-            binding.inputState.error = "State should not be empty."
-            return
-        } else {
-            binding.inputState.error = null
-        }
-        val user = UserProfile(firstName, lastName, city, state)
-        val pref = getSharedPreferences("user", MODE_PRIVATE)
-        pref.edit().putString("profile", Gson().toJson(user)).apply()
-        startActivity(Intent(this, HomeActivity::class.java))
     }
 }

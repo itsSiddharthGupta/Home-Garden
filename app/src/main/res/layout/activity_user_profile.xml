@@ -2,6 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="userProfileViewModel"
+            type="com.example.homegarden.viewmodels.UserProfileViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -46,111 +53,120 @@
                     app:layout_constraintTop_toBottomOf="@id/txtTitle">
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/inputFirstName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/inputFirstName"
                         app:errorEnabled="true"
                         app:errorIconDrawable="@drawable/ic_attention"
+                        app:errorText="@{userProfileViewModel.userProfile.errorMessageFirstName}"
                         app:hintTextColor="@color/colorPrimary">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/firstName"
-                            android:imeOptions="actionNext"
-                            android:maxLines="1"
-                            android:inputType="textCapWords"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:fontFamily="@font/open_sans_bold"
                             android:hint="First Name"
+                            android:imeOptions="actionNext"
+                            android:inputType="textCapWords"
+                            android:maxLines="1"
                             android:paddingStart="4dp"
+                            android:text="@={userProfileViewModel.userProfile.firstName}"
                             android:textColor="@color/colorPrimary"
                             android:textColorHint="@color/colorPrimary"
                             android:textSize="16sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/inputLastName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:errorEnabled="true"
-                        android:id="@+id/inputLastName"
                         android:layout_marginTop="8dp"
+                        app:errorEnabled="true"
                         app:errorIconDrawable="@drawable/ic_attention"
+                        app:errorText="@{userProfileViewModel.userProfile.errorMessageLastName}"
                         app:hintTextColor="@color/colorPrimary">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/lastName"
-                            android:imeOptions="actionNext"
-                            android:maxLines="1"
-                            android:inputType="textCapWords"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:fontFamily="@font/open_sans_bold"
                             android:hint="Last Name"
+                            android:imeOptions="actionNext"
+                            android:inputType="textCapWords"
+                            android:maxLines="1"
                             android:paddingStart="4dp"
+                            android:text="@={userProfileViewModel.userProfile.lastName}"
                             android:textColor="@color/colorPrimary"
                             android:textColorHint="@color/colorPrimary"
                             android:textSize="16sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/inputCity"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:id="@+id/inputCity"
                         app:errorEnabled="true"
                         app:errorIconDrawable="@drawable/ic_attention"
+                        app:errorText="@{userProfileViewModel.userProfile.errorMessageCityName}"
                         app:hintTextColor="@color/colorPrimary">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/city"
-                            android:imeOptions="actionNext"
-                            android:maxLines="1"
-                            android:inputType="textCapWords"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:fontFamily="@font/open_sans_bold"
                             android:hint="City"
+                            android:imeOptions="actionNext"
+                            android:inputType="textCapWords"
+                            android:maxLines="1"
                             android:paddingStart="4dp"
+                            android:text="@={userProfileViewModel.userProfile.cityName}"
                             android:textColor="@color/colorPrimary"
                             android:textColorHint="@color/colorPrimary"
                             android:textSize="16sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/inputState"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         app:errorEnabled="true"
-                        android:id="@+id/inputState"
                         app:errorIconDrawable="@drawable/ic_attention"
+                        app:errorText="@{userProfileViewModel.userProfile.errorMessageStateName}"
                         app:hintTextColor="@color/colorPrimary">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/state"
-                            android:imeOptions="actionDone"
-                            android:maxLines="1"
-                            android:inputType="textCapWords"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:fontFamily="@font/open_sans_bold"
                             android:hint="State"
+                            android:imeOptions="actionDone"
+                            android:inputType="textCapWords"
+                            android:maxLines="1"
                             android:paddingStart="4dp"
+                            android:text="@={userProfileViewModel.userProfile.stateName}"
                             android:textColor="@color/colorPrimary"
                             android:textSize="16sp" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
                 <Button
+                    android:id="@+id/submit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
                     android:backgroundTint="@color/colorPrimary"
                     android:fontFamily="@font/open_sans_bold"
+                    android:onClick="@{()->userProfileViewModel.onClick()}"
                     android:paddingStart="40dp"
-                    android:paddingEnd="40dp"
                     android:paddingTop="16dp"
+                    android:paddingEnd="40dp"
                     android:paddingBottom="16dp"
-                    android:id="@+id/submit"
                     android:text="Continue"
                     android:textAllCaps="false"
                     android:textSize="16sp"
