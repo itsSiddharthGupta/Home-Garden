@@ -9,19 +9,19 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.homegarden.R
 import com.example.homegarden.databinding.ActivityUserProfileBinding
-import com.example.homegarden.viewmodels.UserProfileViewModel
+import com.example.homegarden.viewmodels.RegisterUserViewModel
 import com.google.gson.Gson
 
-class UserProfileActivity : AppCompatActivity() {
+class RegisterUserActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUserProfileBinding
-    private lateinit var viewModel: UserProfileViewModel
+    private lateinit var viewModel: RegisterUserViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_user_profile)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_register_user)
         viewModel =
             ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory(application)).get(
-                UserProfileViewModel::class.java
+                RegisterUserViewModel::class.java
             )
         binding.userProfileViewModel = viewModel
         binding.lifecycleOwner = this

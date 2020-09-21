@@ -6,7 +6,7 @@
 
         <variable
             name="userProfileViewModel"
-            type="com.example.homegarden.viewmodels.UserProfileViewModel" />
+            type="com.example.homegarden.viewmodels.RegisterUserViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

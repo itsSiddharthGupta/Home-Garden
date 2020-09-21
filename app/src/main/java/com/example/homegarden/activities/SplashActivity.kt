@@ -16,7 +16,7 @@ class SplashActivity : AppCompatActivity() {
                 if (userProfileJson != null) {
                     startActivity(Intent(this@SplashActivity, HomeActivity::class.java))
                 } else {
-                    startActivity(Intent(this@SplashActivity, UserProfileActivity::class.java))
+                    startActivity(Intent(this@SplashActivity, RegisterUserActivity::class.java))
                 }
                 finish()
             },
