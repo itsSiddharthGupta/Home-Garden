@@ -8,12 +8,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.homegarden.R
-import com.example.homegarden.databinding.ActivityUserProfileBinding
+import com.example.homegarden.databinding.ActivityRegisterUserBinding
 import com.example.homegarden.viewmodels.RegisterUserViewModel
 import com.google.gson.Gson
 
 class RegisterUserActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityUserProfileBinding
+    private lateinit var binding: ActivityRegisterUserBinding
     private lateinit var viewModel: RegisterUserViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +23,7 @@ class RegisterUserActivity : AppCompatActivity() {
             ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory(application)).get(
                 RegisterUserViewModel::class.java
             )
-        binding.userProfileViewModel = viewModel
+        binding.registerUserViewModel = viewModel
         binding.lifecycleOwner = this
         viewModel.user.observe(this, Observer { saveUserDetails(it) })
     }

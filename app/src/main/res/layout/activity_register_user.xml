@@ -5,7 +5,7 @@
     <data>
 
         <variable
-            name="userProfileViewModel"
+            name="registerUserViewModel"
             type="com.example.homegarden.viewmodels.RegisterUserViewModel" />
     </data>
 
@@ -58,7 +58,7 @@
                         android:layout_height="wrap_content"
                         app:errorEnabled="true"
                         app:errorIconDrawable="@drawable/ic_attention"
-                        app:errorText="@{userProfileViewModel.userProfile.errorMessageFirstName}"
+                        app:errorText="@{registerUserViewModel.userProfile.errorMessageFirstName}"
                         app:hintTextColor="@color/colorPrimary">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -71,7 +71,7 @@
                             android:inputType="textCapWords"
                             android:maxLines="1"
                             android:paddingStart="4dp"
-                            android:text="@={userProfileViewModel.userProfile.firstName}"
+                            android:text="@={registerUserViewModel.userProfile.firstName}"
                             android:textColor="@color/colorPrimary"
                             android:textColorHint="@color/colorPrimary"
                             android:textSize="16sp" />
@@ -84,7 +84,7 @@
                         android:layout_marginTop="8dp"
                         app:errorEnabled="true"
                         app:errorIconDrawable="@drawable/ic_attention"
-                        app:errorText="@{userProfileViewModel.userProfile.errorMessageLastName}"
+                        app:errorText="@{registerUserViewModel.userProfile.errorMessageLastName}"
                         app:hintTextColor="@color/colorPrimary">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -97,7 +97,7 @@
                             android:inputType="textCapWords"
                             android:maxLines="1"
                             android:paddingStart="4dp"
-                            android:text="@={userProfileViewModel.userProfile.lastName}"
+                            android:text="@={registerUserViewModel.userProfile.lastName}"
                             android:textColor="@color/colorPrimary"
                             android:textColorHint="@color/colorPrimary"
                             android:textSize="16sp" />
@@ -110,7 +110,7 @@
                         android:layout_marginTop="8dp"
                         app:errorEnabled="true"
                         app:errorIconDrawable="@drawable/ic_attention"
-                        app:errorText="@{userProfileViewModel.userProfile.errorMessageCityName}"
+                        app:errorText="@{registerUserViewModel.userProfile.errorMessageCityName}"
                         app:hintTextColor="@color/colorPrimary">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -123,7 +123,7 @@
                             android:inputType="textCapWords"
                             android:maxLines="1"
                             android:paddingStart="4dp"
-                            android:text="@={userProfileViewModel.userProfile.cityName}"
+                            android:text="@={registerUserViewModel.userProfile.cityName}"
                             android:textColor="@color/colorPrimary"
                             android:textColorHint="@color/colorPrimary"
                             android:textSize="16sp" />
@@ -136,7 +136,7 @@
                         android:layout_marginTop="8dp"
                         app:errorEnabled="true"
                         app:errorIconDrawable="@drawable/ic_attention"
-                        app:errorText="@{userProfileViewModel.userProfile.errorMessageStateName}"
+                        app:errorText="@{registerUserViewModel.userProfile.errorMessageStateName}"
                         app:hintTextColor="@color/colorPrimary">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -149,7 +149,7 @@
                             android:inputType="textCapWords"
                             android:maxLines="1"
                             android:paddingStart="4dp"
-                            android:text="@={userProfileViewModel.userProfile.stateName}"
+                            android:text="@={registerUserViewModel.userProfile.stateName}"
                             android:textColor="@color/colorPrimary"
                             android:textSize="16sp" />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -162,7 +162,7 @@
                     android:layout_marginTop="24dp"
                     android:backgroundTint="@color/colorPrimary"
                     android:fontFamily="@font/open_sans_bold"
-                    android:onClick="@{()->userProfileViewModel.onClick()}"
+                    android:onClick="@{()->registerUserViewModel.onClick()}"
                     android:paddingStart="40dp"
                     android:paddingTop="16dp"
                     android:paddingEnd="40dp"

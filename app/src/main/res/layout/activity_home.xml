@@ -2,6 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <variable
+            name="homeViewModel"
+            type="com.example.homegarden.viewmodels.HomeViewModel" />
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -38,7 +43,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:fontFamily="@font/open_sans_bold"
-                    android:text="@string/temperature_template"
                     android:textColor="@color/colorPrimary"
                     android:textSize="24sp"
                     app:layout_constraintBottom_toBottomOf="@id/txtAppName"
@@ -61,8 +65,7 @@
                         android:layout_height="80dp"
                         android:layout_marginStart="24dp"
                         android:elevation="8dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/sample" />
+                        android:scaleType="centerCrop"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -78,7 +81,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8dp"
                             android:fontFamily="@font/open_sans_bold"
-                            android:text="Mist"
                             android:textColor="@color/colorPrimary"
                             android:textSize="20sp" />
 
@@ -90,7 +92,6 @@
                             android:background="@drawable/progress_bar_background"
                             android:elevation="4dp"
                             android:indeterminate="false"
-                            android:progress="80"
                             android:progressBackgroundTint="@color/colorPrimary"
                             android:progressDrawable="@drawable/progress_bar" />
 
@@ -100,7 +101,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:fontFamily="@font/open_sans_bold"
-                            android:text="80%"
                             android:textColor="@color/colorPrimary"
                             android:textSize="24sp" />
 
@@ -110,7 +110,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:fontFamily="@font/open_sans"
-                            android:text="Humidity is good today."
                             android:textColor="@color/colorPrimary"
                             android:textSize="16sp" />
                     </LinearLayout>
@@ -158,6 +157,8 @@
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginBottom="16dp"
                                 android:paddingTop="16dp"
                                 android:paddingBottom="16dp"
                                 android:paddingStart="16dp"
@@ -167,58 +168,24 @@
                                 <ImageView
                                     android:layout_width="50dp"
                                     android:layout_height="50dp"
-                                    android:layout_marginStart="32dp"
+                                    android:layout_marginStart="28dp"
                                     android:elevation="4dp"
                                     android:scaleType="centerCrop"
                                     android:src="@drawable/ic_plant"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    android:contentDescription="Plant Image" />
+                                <TextView
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginEnd="28dp"
                                     android:layout_marginStart="32dp"
-                                    android:padding="8dp"
-                                    android:layout_marginEnd="16dp"
-                                    android:gravity="center_vertical"
-                                    android:orientation="vertical">
+                                    android:fontFamily="@font/open_sans_bold"
+                                    android:text="Room Plants"
+                                    android:textColor="@color/colorText"
+                                    android:textSize="18sp" />
 
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginBottom="8dp"
-                                        android:fontFamily="@font/open_sans_bold"
-                                        android:text="Room Plants"
-                                        android:textColor="@color/colorText"
-                                        android:textSize="18sp" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="2dp"
-                                        android:drawablePadding="4dp"
-                                        android:fontFamily="@font/open_sans"
-                                        android:gravity="center"
-                                        android:padding="2dp"
-                                        android:text="2:30 PM"
-                                        android:textColor="@color/colorText"
-                                        android:textSize="14sp"
-                                        app:drawableStartCompat="@drawable/ic_timer" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="2dp"
-                                        android:drawablePadding="4dp"
-                                        android:fontFamily="@font/open_sans"
-                                        android:gravity="center"
-                                        android:padding="2dp"
-                                        android:text="86 ml"
-                                        android:textColor="@color/colorText"
-                                        android:textSize="14sp"
-                                        app:drawableStartCompat="@drawable/ic_drop" />
-                                </LinearLayout>
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
 
@@ -233,64 +200,35 @@
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:padding="16dp"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginBottom="16dp"
+                                android:paddingTop="16dp"
+                                android:paddingBottom="16dp"
+                                android:paddingStart="16dp"
+                                android:paddingEnd="16dp"
                                 android:gravity="center_vertical">
 
                                 <ImageView
                                     android:layout_width="50dp"
                                     android:layout_height="50dp"
-                                    android:layout_marginStart="32dp"
+                                    android:layout_marginStart="28dp"
                                     android:elevation="4dp"
                                     android:scaleType="centerCrop"
                                     android:src="@drawable/ic_lotus"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    android:contentDescription="Plant Image" />
+                                <TextView
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:padding="8dp"
+                                    android:layout_marginEnd="28dp"
                                     android:layout_marginStart="32dp"
-                                    android:layout_marginEnd="16dp"
-                                    android:gravity="center_vertical"
-                                    android:orientation="vertical">
+                                    android:fontFamily="@font/open_sans_bold"
+                                    android:text="Outdoor Plants"
+                                    android:textColor="@color/colorText"
+                                    android:textSize="18sp" />
 
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginBottom="8dp"
-                                        android:fontFamily="@font/open_sans_bold"
-                                        android:text="Outdoor Plants"
-                                        android:textColor="@color/colorText"
-                                        android:textSize="18sp" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="2dp"
-                                        android:drawablePadding="4dp"
-                                        android:fontFamily="@font/open_sans"
-                                        android:gravity="center"
-                                        android:padding="2dp"
-                                        android:text="5:30 PM"
-                                        android:textColor="@color/colorText"
-                                        android:textSize="14sp"
-                                        app:drawableStartCompat="@drawable/ic_timer" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="2dp"
-                                        android:drawablePadding="4dp"
-                                        android:fontFamily="@font/open_sans"
-                                        android:gravity="center"
-                                        android:padding="2dp"
-                                        android:text="300 ml"
-                                        android:textColor="@color/colorText"
-                                        android:textSize="14sp"
-                                        app:drawableStartCompat="@drawable/ic_drop" />
-                                </LinearLayout>
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
                     </LinearLayout>

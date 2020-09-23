@@ -4,15 +4,34 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.example.homegarden.R
 import com.example.homegarden.databinding.ActivityHomeBinding
 import com.example.homegarden.dataclasses.PlantBasicInfo
+import com.example.homegarden.dataclasses.WeatherToday
+import com.example.homegarden.viewmodels.HomeViewModel
+import com.example.homegarden.viewmodels.HomeViewModelFactory
+import com.google.gson.Gson
+import kotlin.math.roundToInt
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
+    private lateinit var viewModel: HomeViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
+        val userProfile = Gson().fromJson<UserProfile>(
+            getSharedPreferences(
+                "user",
+                MODE_PRIVATE
+            ).getString("profile", null), UserProfile::class.java
+        )
+        val factory = HomeViewModelFactory(userProfile.cityName)
+        viewModel = ViewModelProvider(this, factory).get(HomeViewModel::class.java)
+        binding.homeViewModel = viewModel
+        binding.lifecycleOwner = this
         binding.cardPlantIdentify.setOnClickListener {
             startActivity(
                 Intent(
@@ -29,6 +48,26 @@ class HomeActivity : AppCompatActivity() {
                 )
             )
         }
+        viewModel.weatherLiveData.observe(this,
+            { t ->
+                if (t != null)
+                    setWeatherFields(t)
+            })
+    }
+
+    private fun setWeatherFields(weatherToday: WeatherToday) {
+        //todo 1. cache the weather for 1 day = 1 call
+        //todo 2. use shimmer layout for loading ui
+        binding.txtTemperature.text = "${weatherToday.main?.temp?.roundToInt()} °c"
+        binding.txtHumidity.text = "${weatherToday.main?.humidity}%"
+        binding.progressHumidity.progress = weatherToday.main?.humidity!!
+        binding.txtMainWeather.text = weatherToday.weather?.get(0)?.main
+        binding.txtHumidityDesc.text = when (weatherToday.main?.humidity) {
+            in 80..100 -> "High moisture in air"
+            in 40..80 -> "Good moisture. Less water req."
+            else -> "Low moisture. Water the plants."
+        }
+        Glide.with(this).load("http://openweathermap.org/img/wn/${weatherToday.weather?.get(0)?.icon}@2x.png").into(binding.imgWeatherIcon)
     }
 
     private fun getStaticPlantsBasicInfo(): List<PlantBasicInfo> {
