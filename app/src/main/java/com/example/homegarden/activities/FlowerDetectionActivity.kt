@@ -8,23 +8,27 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
-import android.os.SystemClock
 import android.provider.MediaStore
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import com.example.homegarden.R
-import com.example.homegarden.databinding.ActivityImageBinding
+import com.example.homegarden.databinding.ActivityFlowerDetectionBinding
 import com.example.homegarden.util.ImageClassifier
+import com.example.homegarden.viewmodels.FlowerDetectionViewModel
+import com.example.homegarden.viewmodels.FlowerDetectionViewModelFactory
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import java.io.FileNotFoundException
 
 
-class ImageActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityImageBinding
+class FlowerDetectionActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityFlowerDetectionBinding
+    private lateinit var viewModel: FlowerDetectionViewModel
     private val CHOOSE_IMAGE = 1001
     private lateinit var photoImage: Bitmap
     private lateinit var classifier: ImageClassifier
@@ -40,14 +44,29 @@ class ImageActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_image)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_flower_detection)
         classifier = ImageClassifier.create(this, ImageClassifier.Device.CPU, 1)!!
+        val factory = FlowerDetectionViewModelFactory(classifier)
+        viewModel = ViewModelProvider(this, factory).get(FlowerDetectionViewModel::class.java)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
         // Updates the input image size.
         imageSizeX = classifier.getImageSizeX();
         imageSizeY = classifier.getImageSizeY();
         binding.fabAddPic.setOnClickListener {
             chooseImagePicker()
         }
+        viewModel.flowerDetected.observe(this, { t ->
+            if (t != null) {
+                binding.textResult.text = t
+            }
+        })
+        viewModel.isModelRunning.observe(this, { t ->
+            if(t!=null){
+                Log.d("isModelRunning", "$t")
+                binding.btnDetect.isEnabled = !t
+            }
+        })
     }
 
     private fun chooseImagePicker() {
@@ -67,14 +86,7 @@ class ImageActivity : AppCompatActivity() {
             val result = CropImage.getActivityResult(data)
             photoImage = MediaStore.Images.Media.getBitmap(this.contentResolver, result.uri)
             photoImage = Bitmap.createScaledBitmap(photoImage, INPUT_SIZE, INPUT_SIZE, false)
-            binding.imgCaptured.setImageBitmap(photoImage)
-            val startTime = SystemClock.uptimeMillis()
-            val results: List<ImageClassifier.Recognition?>? =
-                classifier.recognizeImage(photoImage, 0)
-            val lastProcessingTimeMs = SystemClock.uptimeMillis() - startTime
-            binding.textResult.text =
-                results.toString() + " , Time : " + lastProcessingTimeMs + ", x,y : " + imageSizeX + "," + imageSizeY
-
+            viewModel.imageSelected.value = photoImage
         } else if (requestCode == CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE && resultCode == RESULT_OK) {
             val imageUri: Uri = CropImage.getPickImageResultUri(this, data)
 
@@ -94,15 +106,7 @@ class ImageActivity : AppCompatActivity() {
                 photoImage = BitmapFactory.decodeStream(stream)
                 photoImage =
                     Bitmap.createScaledBitmap(photoImage, INPUT_SIZE, INPUT_SIZE, false)
-                binding.imgCaptured.setImageBitmap(photoImage)
-                val startTime = SystemClock.uptimeMillis()
-                val results: List<ImageClassifier.Recognition?>? =
-                    classifier.recognizeImage(photoImage, 0)
-                val lastProcessingTimeMs = SystemClock.uptimeMillis() - startTime
-
-                binding.textResult.text =
-                    results.toString() + " , Time : " + lastProcessingTimeMs + ", x,y : " + imageSizeX + "," + imageSizeY
-
+                viewModel.imageSelected.value = photoImage
             } catch (e: FileNotFoundException) {
                 e.printStackTrace()
             }
