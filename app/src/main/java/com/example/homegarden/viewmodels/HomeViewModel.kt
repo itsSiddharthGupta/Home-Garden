@@ -1,7 +1,6 @@
 package com.example.homegarden.viewmodels
 
 import android.util.Log
-import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.homegarden.dataclasses.WeatherToday
@@ -21,7 +20,7 @@ class HomeViewModel(private val city: String) : ViewModel() {
     }
 
     private fun getTodayWeather() {
-        Retrofit.retrofitClient?.create(ApiService::class.java)
+        Retrofit.retrofitClientWeather?.create(ApiService::class.java)
             ?.getTodayWeather(city, OPEN_WEATHER_MAP_API_QUERY_UNIT, OPEN_WEATHER_MAP_API_KEY)
             ?.enqueue(object : Callback<WeatherToday> {
                 override fun onResponse(

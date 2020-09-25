@@ -1,20 +1,48 @@
 package com.example.homegarden.util
 
+import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
+
 
 object Retrofit {
-    private val client = OkHttpClient.Builder().build()
-    var retrofitClient: Retrofit? = null
-        get(){
-        if(field==null){
-            field = Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(OPEN_WEATHER_MAP_API_BASE_URL)
-                .client(client)
-                .build()
+    private val gson = GsonBuilder()
+        .setLenient()
+        .create()
+    var retrofitClientWeather: Retrofit? = null
+        get() {
+            if (field == null) {
+                field = Retrofit.Builder()
+                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .baseUrl(OPEN_WEATHER_MAP_API_BASE_URL)
+                    .client(okHttpClient())
+                    .build()
+            }
+            return field
         }
-        return field
+
+    var retrofitClientPlant: Retrofit? = null
+        get() {
+            if (field == null) {
+                field = Retrofit.Builder()
+                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .baseUrl(HOME_GARDEN_API_BASE_URL)
+                    .client(okHttpClient())
+                    .build()
+            }
+            return field
+        }
+
+    private fun okHttpClient(): OkHttpClient {
+        val httpClient = OkHttpClient.Builder()
+        httpClient.readTimeout(60, TimeUnit.SECONDS)
+        httpClient.connectTimeout(60, TimeUnit.SECONDS)
+        val interceptor = HttpLoggingInterceptor()
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
+        httpClient.interceptors().add(interceptor)
+        return httpClient.build()
     }
 }

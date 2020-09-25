@@ -2,6 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.homegarden.viewmodels.PlantDetailsViewModel" />
+    </data>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -18,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:fontFamily="@font/open_sans_bold"
-                android:text="Spider Plant"
+                android:text="@{viewModel.plantDetails.name.toUpperCase()}"
                 android:textColor="@color/colorPrimary"
                 android:textSize="32sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -55,7 +60,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="3dp"
                         android:fontFamily="@font/open_sans"
-                        android:text="12-29 °C"
+                        android:text="@{viewModel.plantDetails.careInfo.temperatureDetails}"
                         android:textColor="@color/colorPrimary"
                         android:textSize="16sp" />
 
@@ -74,7 +79,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="3dp"
                         android:fontFamily="@font/open_sans"
-                        android:text="Take care not to over water as their roots are prone to rotting. In winter, water it only once in several months."
+                        android:text="@{viewModel.plantDetails.careInfo.waterDetails}"
                         android:textColor="@color/colorPrimary"
                         android:textSize="16sp" />
 
@@ -93,7 +98,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="3dp"
                         android:fontFamily="@font/open_sans"
-                        android:text="Flourishes both under bright and low sunlight."
+                        android:text="@{viewModel.plantDetails.careInfo.lightDetails}"
                         android:textColor="@color/colorPrimary"
                         android:textSize="16sp" />
 
@@ -112,7 +117,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="3dp"
                         android:fontFamily="@font/open_sans"
-                        android:text="Can survive dry, poor soil conditions"
+                        android:text="@{viewModel.plantDetails.careInfo.soilDetails}"
                         android:textColor="@color/colorPrimary"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -124,7 +129,7 @@
                     android:id="@+id/imgPlant"
                     android:layout_margin="4dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/spider_plant" />
+                    app:image="@{viewModel.plantDetails.imageUrl}"/>
             </LinearLayout>
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
@@ -145,7 +150,7 @@
                     android:padding="8dp"
                     android:fontFamily="@font/open_sans"
                     android:textSize="18sp"
-                    android:text="@string/description_plant"/>
+                    android:text="@{viewModel.plantDetails.description}"/>
             </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

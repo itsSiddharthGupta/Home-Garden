@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.homegarden.R
@@ -36,7 +35,7 @@ class HomeActivity : AppCompatActivity() {
             startActivity(
                 Intent(
                     this,
-                    ImageActivity::class.java
+                    FlowerDetectionActivity::class.java
                 )
             )
         }
