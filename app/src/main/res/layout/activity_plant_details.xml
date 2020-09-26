@@ -7,10 +7,20 @@
             name="viewModel"
             type="com.example.homegarden.viewmodels.PlantDetailsViewModel" />
     </data>
-
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/shimmerLayout">
+        <include layout="@layout/shimmer_layout_plant_details"/>
+    </com.facebook.shimmer.ShimmerFrameLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
+        android:id="@+id/scrollView"
         android:background="@drawable/home_gradient">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -154,4 +164,5 @@
             </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

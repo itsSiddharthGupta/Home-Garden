@@ -14,8 +14,10 @@ import retrofit2.Response
 
 class HomeViewModel(private val city: String) : ViewModel() {
     var weatherLiveData: MutableLiveData<WeatherToday> = MutableLiveData()
+    var isWeatherLoading: MutableLiveData<Boolean> = MutableLiveData()
 
     init {
+        isWeatherLoading.value = true
         getTodayWeather()
     }
 
@@ -33,10 +35,12 @@ class HomeViewModel(private val city: String) : ViewModel() {
                             weatherLiveData.value = response.body()
                         }
                     }
+                    isWeatherLoading.value = false
                 }
 
                 override fun onFailure(call: Call<WeatherToday>, t: Throwable) {
                     Log.e("ErrorWeatherFetch", t.toString())
+                    isWeatherLoading.value = false
                 }
             })
     }

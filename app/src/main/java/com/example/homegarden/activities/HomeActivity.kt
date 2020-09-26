@@ -2,6 +2,8 @@ package com.example.homegarden.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -52,11 +54,24 @@ class HomeActivity : AppCompatActivity() {
                 if (t != null)
                     setWeatherFields(t)
             })
+
+        viewModel.isWeatherLoading.observe(this,
+            { t ->
+                if (t != null) {
+                    Log.e("IsLoading", t.toString())
+                    if (t) {
+                        binding.shimmerLayout.visibility = View.VISIBLE
+                        binding.weatherTodayLinearLayout.visibility = View.GONE
+                    } else {
+                        binding.weatherTodayLinearLayout.visibility = View.VISIBLE
+                        binding.shimmerLayout.visibility = View.GONE
+                    }
+                }
+            })
     }
 
     private fun setWeatherFields(weatherToday: WeatherToday) {
         //todo 1. cache the weather for 1 day = 1 call
-        //todo 2. use shimmer layout for loading ui
         binding.txtTemperature.text = "${weatherToday.main?.temp?.roundToInt()} °c"
         binding.txtHumidity.text = "${weatherToday.main?.humidity}%"
         binding.progressHumidity.progress = weatherToday.main?.humidity!!
@@ -66,7 +81,9 @@ class HomeActivity : AppCompatActivity() {
             in 40..80 -> "Good moisture. Less water req."
             else -> "Low moisture. Water the plants."
         }
-        Glide.with(this).load("http://openweathermap.org/img/wn/${weatherToday.weather?.get(0)?.icon}@2x.png").into(binding.imgWeatherIcon)
+        Glide.with(this)
+            .load("http://openweathermap.org/img/wn/${weatherToday.weather?.get(0)?.icon}@2x.png")
+            .into(binding.imgWeatherIcon)
     }
 
     private fun getStaticPlantsBasicInfo(): List<PlantBasicInfo> {

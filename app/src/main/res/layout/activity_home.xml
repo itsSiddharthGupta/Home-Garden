@@ -3,10 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="homeViewModel"
             type="com.example.homegarden.viewmodels.HomeViewModel" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -49,72 +51,97 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/txtAppName" />
 
-                <LinearLayout
-                    android:id="@+id/weatherToday"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayoutWeather"
                     android:layout_width="0dp"
-                    android:layout_height="150dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
-                    android:gravity="center_vertical"
                     app:layout_constraintEnd_toEndOf="@id/txtTemperature"
                     app:layout_constraintStart_toStartOf="@id/txtAppName"
                     app:layout_constraintTop_toBottomOf="@id/txtAppName">
 
-                    <ImageView
-                        android:id="@+id/imgWeatherIcon"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:layout_marginStart="24dp"
-                        android:elevation="8dp"
-                        android:scaleType="centerCrop"/>
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/shimmerLayout"
+                        android:background="@color/colorPrimary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="visible"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent">
+
+                        <include layout="@layout/shimmer_layout_weather" />
+                    </com.facebook.shimmer.ShimmerFrameLayout>
 
                     <LinearLayout
+                        android:id="@+id/weatherTodayLinearLayout"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginEnd="16dp"
+                        android:layout_height="150dp"
+                        android:visibility="gone"
                         android:gravity="center_vertical"
-                        android:orientation="vertical">
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent">
 
-                        <TextView
-                            android:id="@+id/txtMainWeather"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="8dp"
-                            android:fontFamily="@font/open_sans_bold"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="20sp" />
+                        <ImageView
+                            android:id="@+id/imgWeatherIcon"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_marginStart="24dp"
+                            android:elevation="8dp"
+                            android:scaleType="centerCrop" />
 
-                        <ProgressBar
-                            android:id="@+id/progressHumidity"
-                            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="10dp"
-                            android:background="@drawable/progress_bar_background"
-                            android:elevation="4dp"
-                            android:indeterminate="false"
-                            android:progressBackgroundTint="@color/colorPrimary"
-                            android:progressDrawable="@drawable/progress_bar" />
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginEnd="16dp"
+                            android:gravity="center_vertical"
+                            android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/txtHumidity"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:fontFamily="@font/open_sans_bold"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="24sp" />
+                            <TextView
+                                android:id="@+id/txtMainWeather"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="8dp"
+                                android:fontFamily="@font/open_sans_bold"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="20sp" />
 
-                        <TextView
-                            android:id="@+id/txtHumidityDesc"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:fontFamily="@font/open_sans"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="16sp" />
+                            <ProgressBar
+                                android:id="@+id/progressHumidity"
+                                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="10dp"
+                                android:background="@drawable/progress_bar_background"
+                                android:elevation="4dp"
+                                android:indeterminate="false"
+                                android:progressBackgroundTint="@color/colorPrimary"
+                                android:progressDrawable="@drawable/progress_bar" />
+
+                            <TextView
+                                android:id="@+id/txtHumidity"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:fontFamily="@font/open_sans_bold"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="24sp" />
+
+                            <TextView
+                                android:id="@+id/txtHumidityDesc"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:fontFamily="@font/open_sans"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="16sp" />
+                        </LinearLayout>
+
                     </LinearLayout>
-
-                </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
                     android:id="@+id/textview"
@@ -125,8 +152,8 @@
                     android:text="My Plants"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp"
-                    app:layout_constraintStart_toStartOf="@id/weatherToday"
-                    app:layout_constraintTop_toBottomOf="@id/weatherToday" />
+                    app:layout_constraintStart_toStartOf="@id/constraintLayoutWeather"
+                    app:layout_constraintTop_toBottomOf="@id/constraintLayoutWeather" />
 
                 <HorizontalScrollView
                     android:id="@+id/myPlantsView"
@@ -146,10 +173,10 @@
                         android:orientation="horizontal">
 
                         <androidx.cardview.widget.CardView
+                            android:id="@+id/cardRoomPlants"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
-                            android:id="@+id/cardRoomPlants"
                             android:elevation="4dp"
                             app:cardBackgroundColor="@color/colorPrimary"
                             app:cardCornerRadius="12dp">
@@ -159,28 +186,29 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="16dp"
                                 android:layout_marginBottom="16dp"
-                                android:paddingTop="16dp"
-                                android:paddingBottom="16dp"
+                                android:gravity="center_vertical"
                                 android:paddingStart="16dp"
+                                android:paddingTop="16dp"
                                 android:paddingEnd="16dp"
-                                android:gravity="center_vertical">
+                                android:paddingBottom="16dp">
 
                                 <ImageView
                                     android:layout_width="50dp"
                                     android:layout_height="50dp"
                                     android:layout_marginStart="28dp"
+                                    android:contentDescription="Plant Image"
                                     android:elevation="4dp"
                                     android:scaleType="centerCrop"
                                     android:src="@drawable/ic_plant"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    android:contentDescription="Plant Image" />
+                                    app:layout_constraintTop_toTopOf="parent" />
+
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginEnd="28dp"
                                     android:layout_marginStart="32dp"
+                                    android:layout_marginEnd="28dp"
                                     android:fontFamily="@font/open_sans_bold"
                                     android:text="Room Plants"
                                     android:textColor="@color/colorText"
@@ -202,28 +230,29 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="16dp"
                                 android:layout_marginBottom="16dp"
-                                android:paddingTop="16dp"
-                                android:paddingBottom="16dp"
+                                android:gravity="center_vertical"
                                 android:paddingStart="16dp"
+                                android:paddingTop="16dp"
                                 android:paddingEnd="16dp"
-                                android:gravity="center_vertical">
+                                android:paddingBottom="16dp">
 
                                 <ImageView
                                     android:layout_width="50dp"
                                     android:layout_height="50dp"
                                     android:layout_marginStart="28dp"
+                                    android:contentDescription="Plant Image"
                                     android:elevation="4dp"
                                     android:scaleType="centerCrop"
                                     android:src="@drawable/ic_lotus"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    android:contentDescription="Plant Image" />
+                                    app:layout_constraintTop_toTopOf="parent" />
+
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginEnd="28dp"
                                     android:layout_marginStart="32dp"
+                                    android:layout_marginEnd="28dp"
                                     android:fontFamily="@font/open_sans_bold"
                                     android:text="Outdoor Plants"
                                     android:textColor="@color/colorText"
@@ -254,10 +283,10 @@
                     android:layout_marginBottom="8dp"
                     app:cardBackgroundColor="@color/colorPrimary"
                     app:cardCornerRadius="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@id/myPlantsView"
                     app:layout_constraintStart_toStartOf="@id/myPlantsView"
-                    app:layout_constraintTop_toBottomOf="@id/textview2"
-                    app:layout_constraintBottom_toBottomOf="parent">
+                    app:layout_constraintTop_toBottomOf="@id/textview2">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -309,20 +338,22 @@
         </ScrollView>
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/nav"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/nav"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
-            
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"/>
+                    android:layout_height="50dp" />
+
                 <LinearLayout
                     android:id="@+id/linearLayout"
                     android:layout_width="match_parent"
@@ -408,13 +439,14 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </LinearLayout>
             </LinearLayout>
+
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/colorAccent"
+                android:src="@drawable/ic_plus"
                 app:layout_anchor="@id/linearLayout"
-                app:layout_anchorGravity="center|top"
-                android:src="@drawable/ic_plus"/>
+                app:layout_anchorGravity="center|top" />
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

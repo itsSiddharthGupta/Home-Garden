@@ -14,8 +14,10 @@ import retrofit2.Response
 
 class PlantDetailsViewModel(name: String) : ViewModel() {
     val plantDetails: MutableLiveData<PlantDetails> = MutableLiveData()
+    val isLoading: MutableLiveData<Boolean> = MutableLiveData()
 
     init {
+        isLoading.value = true
         getPlantDetails(name)
     }
 
@@ -31,10 +33,12 @@ class PlantDetailsViewModel(name: String) : ViewModel() {
                             plantDetails.value = Gson().fromJson(json, PlantDetails::class.java)
                         }
                     }
+                    isLoading.value = false
                 }
 
                 override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                     Log.d("ErrorPlant", t.toString())
+                    isLoading.value = false
                 }
             })
     }

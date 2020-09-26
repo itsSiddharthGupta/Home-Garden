@@ -12,4 +12,5 @@
     <color name="greenStart">#48BD9D</color>
     <color name="greenEnd">#A6D87C</color>
     <color name="greenProgress">#9BDAC8</color>
+    <color name="colorGrey">#dddddd</color>
 </resources>
