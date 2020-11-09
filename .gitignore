@@ -12,3 +12,9 @@
 /captures
 .externalNativeBuild
 .cxx
+/app/src/main/java/com/example/homegarden/util/ApiKeys.kt
+/app/src/main/assets/labels.txt
+/app/release/app-release.apk
+/app/src/main/assets/model.tflite
+/app/release/output-metadata.json
+/signedkey.jks
