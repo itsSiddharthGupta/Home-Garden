@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.ImageActivity"/>
+        <activity android:name=".activities.FlowerDetectionActivity"/>
         <activity android:name=".activities.MyPlantsActivity"/>
         <activity android:name=".activities.PlantDetailsActivity"/>
         <activity android:name=".activities.HomeActivity"/>
