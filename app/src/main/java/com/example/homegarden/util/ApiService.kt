@@ -1,5 +1,6 @@
 package com.example.homegarden.util
 
+import com.example.homegarden.dataclasses.PlantsListResponse
 import com.example.homegarden.dataclasses.WeatherToday
 import com.google.gson.JsonObject
 import retrofit2.Call
@@ -16,4 +17,10 @@ interface ApiService {
 
     @GET("plants/")
     fun getPlantByName(@Query("name") name: String): Call<JsonObject>
+
+    @GET("plants/indoor")
+    fun getIndoorPlants(): Call<PlantsListResponse>
+
+    @GET("plants/outdoor")
+    fun getOutdoorPlants(): Call<PlantsListResponse>
 }

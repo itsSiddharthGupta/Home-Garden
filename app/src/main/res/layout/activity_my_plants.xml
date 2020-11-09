@@ -80,7 +80,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:fontFamily="@font/open_sans"
-                            android:text="Interior plants need less water in winter. A major cause of killing any kind of plant is over-watering."
                             android:textColor="@color/colorText"
                             android:textSize="16sp" />
                     </LinearLayout>

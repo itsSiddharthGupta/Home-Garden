@@ -5,63 +5,48 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.homegarden.R
 import com.example.homegarden.adapters.PlantsInfoListAdapter
 import com.example.homegarden.databinding.ActivityMyPlantsBinding
 import com.example.homegarden.dataclasses.PlantBasicInfo
+import com.example.homegarden.dataclasses.PlantDetails
+import com.example.homegarden.viewmodels.MyPlantsActivityViewModel
 
 class MyPlantsActivity : AppCompatActivity(), PlantsInfoListAdapter.OnPlantItemListener {
     private lateinit var binding: ActivityMyPlantsBinding
+    private lateinit var viewModel: MyPlantsActivityViewModel
+    private lateinit var adapter: PlantsInfoListAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_my_plants)
-        binding.recyclerViewPlantsInfo.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-        binding.recyclerViewPlantsInfo.adapter = PlantsInfoListAdapter(
-            this,
-            getStaticPlantsBasicInfo(),
-            this
-        )
-    }
-
-    private fun getStaticPlantsBasicInfo(): List<PlantBasicInfo> {
-        return listOf(
-            PlantBasicInfo(
-                1,
-                "Peace Lily",
-                "Peace Lilly is an indoor plant that has become universally aligned with these aspirations.",
-                R.drawable.peace_lily
-            ),
-            PlantBasicInfo(
-                2,
-                "Aloe Vera",
-                "Aloe Vera is also called the “Miracle plant”. There are good reasons for this. It’s renowned worldwide for having medicinal properties  that  rejuvenate, soothe and heal the human body.",
-                R.drawable.aloe_vera
-            ),
-            PlantBasicInfo(
-                3,
-                "Ferns",
-                "Ferns are counted among one of the oldest species of plants on earth, dating back to prehistoric times. Ferns belong to a group of vascular seeds, that bear neither flowers nor seeds.",
-                R.drawable.nephrolepis_exaltata_aurea_pivla_fern
-            ),
-            PlantBasicInfo(
-                4,
-                "Green Spider Plant",
-                "Spider plants have leaves that look like blades of grass with streaks of different colors either in the center or at the edges.",
-                R.drawable.spider_plant
-            ),
-            PlantBasicInfo(
-                5,
-                "Indian Basil",
-                "It’s been grown in India from as far back as 5,000 years. No wonder then, that Indians harbour a deep cultural and religious attachment with the plant from time immemorial.",
-                R.drawable.holy_basil
+        viewModel =
+            ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory(application)).get(
+                MyPlantsActivityViewModel::class.java
             )
-        )
+        adapter = PlantsInfoListAdapter(this)
+        val isIndoor = intent.extras?.getBoolean("IS-INDOOR")
+        if (isIndoor != null && isIndoor) {
+            viewModel.getIndoorPlants()
+            binding.txtTitle.text = "My Room Plants"
+            binding.txtTips.text = "Interior plants need less water in winter. A major cause of killing any kind of plant is over-watering."
+        } else {
+            viewModel.getOutdoorPlants()
+            binding.txtTitle.text = "My Outdoor Plants"
+            binding.txtTips.text = "Outdoor plants need more water and sunlight. A major cause of killing outdoor plants is lack of sunlight."
+        }
+        viewModel.plants.observe(this, {
+            if (it != null) {
+                adapter.fillData(it)
+            }
+        })
+        binding.recyclerViewPlantsInfo.layoutManager =
+            StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        binding.recyclerViewPlantsInfo.adapter = adapter
     }
 
-    override fun onPlantItemClick(plant: PlantBasicInfo) {
-        Toast.makeText(this, plant.toString(), Toast.LENGTH_SHORT).show()
-        startActivity(Intent(this, PlantDetailsActivity::class.java))
+    override fun onPlantItemClick(plant: PlantDetails) {
+        startActivity(Intent(this, PlantDetailsActivity::class.java).putExtra("NAME", plant.name))
     }
 }
