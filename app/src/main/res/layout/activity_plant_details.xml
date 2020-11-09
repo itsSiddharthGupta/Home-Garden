@@ -138,7 +138,7 @@
                     android:layout_weight="1"
                     android:id="@+id/imgPlant"
                     android:layout_margin="4dp"
-                    android:scaleType="centerCrop"
+                    android:scaleType="fitXY"
                     app:image="@{viewModel.plantDetails.imageUrl}"/>
             </LinearLayout>
             <androidx.cardview.widget.CardView

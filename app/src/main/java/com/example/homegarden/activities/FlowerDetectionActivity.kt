@@ -10,6 +10,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -56,13 +57,24 @@ class FlowerDetectionActivity : AppCompatActivity() {
         binding.fabAddPic.setOnClickListener {
             chooseImagePicker()
         }
+        binding.btnDetails.setOnClickListener {
+            startActivity(
+                Intent(
+                    this@FlowerDetectionActivity,
+                    PlantDetailsActivity::class.java
+                ).putExtra("NAME", viewModel.flowerDetected.value)
+            )
+        }
         viewModel.flowerDetected.observe(this, { t ->
             if (t != null) {
                 binding.textResult.text = t
+                binding.btnDetails.visibility = View.VISIBLE
+            } else {
+                binding.btnDetails.visibility = View.GONE
             }
         })
         viewModel.isModelRunning.observe(this, { t ->
-            if(t!=null){
+            if (t != null) {
                 Log.d("isModelRunning", "$t")
                 binding.btnDetect.isEnabled = !t
             }
