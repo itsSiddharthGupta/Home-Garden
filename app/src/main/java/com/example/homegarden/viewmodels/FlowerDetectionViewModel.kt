@@ -3,9 +3,6 @@ package com.example.homegarden.viewmodels
 import android.graphics.Bitmap
 import android.os.SystemClock
 import android.util.Log
-import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.homegarden.util.ImageClassifier
@@ -24,7 +21,13 @@ class FlowerDetectionViewModel(private val classifier: ImageClassifier) : ViewMo
                 val results: List<ImageClassifier.Recognition?>? =
                     classifier.recognizeImage(imageSelected.value!!, 0)
                 val lastProcessingTimeMs = SystemClock.uptimeMillis() - startTime
-                flowerDetected.value = results.toString() + " , Time : " + lastProcessingTimeMs
+                flowerDetected.value =
+                    results?.get(0)?.title?.toUpperCase() + " flower ,Confidence: ${
+                        String.format(
+                            "%.1f%%",
+                            results?.get(0)?.confidence?.times(100.0f)
+                        )
+                    }, Time : " + lastProcessingTimeMs
             } catch (e: Exception) {
                 Log.e("DetectionException", e.toString())
                 flowerDetected.value = "Failed to detect. Try again."
