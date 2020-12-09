@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.homegarden.R
 import com.example.homegarden.databinding.ActivityRegisterUserBinding
+import com.example.homegarden.dataclasses.UserProfile
 import com.example.homegarden.viewmodels.RegisterUserViewModel
 import com.google.gson.Gson
 

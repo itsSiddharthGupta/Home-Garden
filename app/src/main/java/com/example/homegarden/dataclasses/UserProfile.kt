@@ -1,4 +1,4 @@
-package com.example.homegarden.activities
+package com.example.homegarden.dataclasses
 
 import androidx.databinding.BaseObservable
 import androidx.databinding.Bindable

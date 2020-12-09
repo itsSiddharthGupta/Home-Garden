@@ -2,7 +2,7 @@ package com.example.homegarden.viewmodels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.homegarden.activities.UserProfile
+import com.example.homegarden.dataclasses.UserProfile
 
 class RegisterUserViewModel : ViewModel() {
     var userProfile: UserProfile = UserProfile()

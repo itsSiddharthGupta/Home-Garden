@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.homegarden.R
 import com.example.homegarden.databinding.ActivityHomeBinding
-import com.example.homegarden.dataclasses.PlantBasicInfo
+import com.example.homegarden.dataclasses.UserProfile
 import com.example.homegarden.dataclasses.WeatherToday
 import com.example.homegarden.viewmodels.HomeViewModel
 import com.example.homegarden.viewmodels.HomeViewModelFactory
@@ -55,6 +55,14 @@ class HomeActivity : AppCompatActivity() {
                     this,
                     MyPlantsActivity::class.java
                 ).putExtra("IS-INDOOR", false)
+            )
+        }
+        binding.constraintLayoutProfile.setOnClickListener {
+            startActivity(
+                Intent(
+                    this,
+                    MyProfileActivity::class.java
+                )
             )
         }
         viewModel.weatherLiveData.observe(this,
