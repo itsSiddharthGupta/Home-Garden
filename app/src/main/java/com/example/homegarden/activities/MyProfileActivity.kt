@@ -15,7 +15,7 @@ class MyProfileActivity : AppCompatActivity() {
     lateinit var viewModel: MyProfileActivityViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_register_user)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_my_profile)
         viewModel =
             ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory(application)).get(
                 MyProfileActivityViewModel::class.java

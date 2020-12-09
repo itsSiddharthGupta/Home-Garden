@@ -30,17 +30,17 @@
                     android:layout_height="wrap_content"
                     android:text="First Name"
                     android:fontFamily="@font/open_sans_bold"
-                    android:textColor="@color/colorLightWhite"
-                    android:textSize="16sp"
+                    android:textColor="#000"
+                    android:textSize="18sp"
                     android:layout_margin="8dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{viewModel.userProfile.firstName}"
-                    android:fontFamily="@font/open_sans"
+                    android:fontFamily="@font/open_sans_bold"
                     android:textColor="@color/colorLightWhite"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     android:layout_margin="8dp"/>
 
                 <TextView
@@ -48,17 +48,17 @@
                     android:layout_height="wrap_content"
                     android:text="Last Name"
                     android:fontFamily="@font/open_sans_bold"
-                    android:textColor="@color/colorLightWhite"
-                    android:textSize="16sp"
+                    android:textColor="#000"
+                    android:textSize="18sp"
                     android:layout_margin="8dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{viewModel.userProfile.lastName}"
-                    android:fontFamily="@font/open_sans"
+                    android:fontFamily="@font/open_sans_bold"
                     android:textColor="@color/colorLightWhite"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     android:layout_margin="8dp"/>
 
                 <TextView
@@ -66,23 +66,14 @@
                     android:layout_height="wrap_content"
                     android:text="City"
                     android:fontFamily="@font/open_sans_bold"
-                    android:textColor="@color/colorLightWhite"
-                    android:textSize="16sp"
+                    android:textColor="#000"
+                    android:textSize="18sp"
                     android:layout_margin="8dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{viewModel.userProfile.cityName}"
-                    android:fontFamily="@font/open_sans"
-                    android:textColor="@color/colorLightWhite"
-                    android:textSize="14sp"
-                    android:layout_margin="8dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="State"
                     android:fontFamily="@font/open_sans_bold"
                     android:textColor="@color/colorLightWhite"
                     android:textSize="16sp"
@@ -91,10 +82,19 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="State"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:layout_margin="8dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="@{viewModel.userProfile.stateName}"
-                    android:fontFamily="@font/open_sans"
+                    android:fontFamily="@font/open_sans_bold"
                     android:textColor="@color/colorLightWhite"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     android:layout_margin="8dp"/>
             </LinearLayout>
         </ScrollView>
